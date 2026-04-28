@@ -49,23 +49,74 @@ const waLink = (msg) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(ms
 //  NAV
 // ================================================================
 function Nav() {
+  const [open, setOpen] = useState(false);
+
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
+
+  const links = [
+    { href: '#hero', label: 'Inicio' },
+    { href: '#courts', label: 'Canchas' },
+    { href: '#book', label: 'Reservar' },
+    { href: '#pricing', label: 'Precios' },
+    { href: '#location', label: 'Ubicación' },
+  ];
+
   return (
-    <nav className="nav">
-      <div className="nav__logo">
-        <span className="ball"></span>
-        <span>FIRST<span style={{color:'var(--lime)'}}>·</span>PADEL</span>
+    <>
+      <nav className="nav">
+        <div className="nav__logo">
+          <span className="ball"></span>
+          <span>FIRST<span style={{color:'var(--lime)'}}>·</span>PADEL</span>
+        </div>
+        <div className="nav__links">
+          <a className="nav__link --active" href="#hero">Inicio</a>
+          <a className="nav__link" href="#courts">Canchas</a>
+          <a className="nav__link" href="#book">Reservar</a>
+          <a className="nav__link" href="#pricing">Precios</a>
+          <a className="nav__link" href="#location">Ubicación</a>
+        </div>
+        <a className="btn3d --sm --wa" href={waLink("Hola! Quiero reservar una cancha en First Padel Center.")} target="_blank" rel="noopener">
+          <Icon.wa /> Reservar
+        </a>
+        <button
+          className={`nav__burger ${open ? '--open' : ''}`}
+          onClick={() => setOpen(o => !o)}
+          aria-label="Menú"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+
+      <div className={`mobile-drawer ${open ? '--open' : ''}`}>
+        {links.map(l => (
+          <a
+            key={l.href}
+            href={l.href}
+            className="mobile-drawer__link"
+            onClick={() => setOpen(false)}
+          >
+            {l.label}
+            <span className="arrow"><Icon.arrow /></span>
+          </a>
+        ))}
+        <div className="mobile-drawer__cta">
+          <a
+            className="btn3d --ghost --lg"
+            style={{justifyContent:'center'}}
+            href="https://instagram.com/firstpadelcenter"
+            target="_blank"
+            rel="noopener"
+            onClick={() => setOpen(false)}
+          >
+            <Icon.ig /> @firstpadelcenter
+          </a>
+        </div>
       </div>
-      <div className="nav__links">
-        <a className="nav__link --active" href="#hero">Inicio</a>
-        <a className="nav__link" href="#courts">Canchas</a>
-        <a className="nav__link" href="#book">Reservar</a>
-        <a className="nav__link" href="#pricing">Precios</a>
-        <a className="nav__link" href="#location">Ubicación</a>
-      </div>
-      <a className="btn3d --sm --wa" href={waLink("Hola! Quiero reservar una cancha en First Padel Center.")} target="_blank" rel="noopener">
-        <Icon.wa /> Reservar
-      </a>
-    </nav>
+    </>
   );
 }
 
@@ -128,11 +179,11 @@ function Hero() {
 
               <div className="court3d__tag --live">
                 <div className="label">EN VIVO · CANCHA 02</div>
-                <div className="value">🔴 Match · 4–3</div>
+                <div className="value" style={{fontSize:18}}>🔴 Match · 4–3</div>
               </div>
               <div className="court3d__tag --book">
                 <div className="label">PRÓXIMO TURNO · CANCHA 04</div>
-                <div className="value">19:00 hs · $14.500</div>
+                <div className="value" style={{fontSize:18}}>19:00 hs · $14.500</div>
               </div>
             </div>
           </div>

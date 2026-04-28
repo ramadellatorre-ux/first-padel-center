@@ -14,10 +14,9 @@ Landing page interactiva con reservas integradas por WhatsApp, hero animado, lis
 
 ```
 first-padel-center/
-├── index.html          ← entry point (carga React + Babel desde CDN)
-├── styles.css          ← sistema de diseño completo
-├── app.jsx             ← app React (nav, hero, canchas, reservas, etc.)
-└── index-offline.html  ← versión standalone con todo inlineado (1.5MB, sin internet)
+├── index.html    ← entry point (carga React + Babel desde CDN)
+├── styles.css    ← sistema de diseño completo (con breakpoints mobile)
+└── app.jsx       ← app React (nav, hero, canchas, reservas, etc.)
 ```
 
 ## Cómo correr localmente
@@ -31,8 +30,6 @@ npx serve .
 ```
 
 > Importante: **no abrir como `file://`** — el navegador bloquea la carga de `app.jsx` por CORS. Tiene que servirse vía HTTP.
-
-Si querés algo 100% portable sin servidor, usar `index-offline.html` — funciona ofuline con doble-click.
 
 ## Deploy
 

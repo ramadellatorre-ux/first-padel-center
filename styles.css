@@ -1018,3 +1018,349 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 @keyframes tickerMove {
   to { transform: translateX(-50%); }
 }
+
+/* ===================================================== */
+/* ============== MOBILE OPTIMIZATIONS ================= */
+/* ===================================================== */
+
+/* Mobile nav drawer */
+.nav__burger {
+  display: none;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  border: 1px solid var(--line-2);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: auto;
+}
+.nav__burger span {
+  display: block;
+  width: 18px; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.nav__burger.--open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav__burger.--open span:nth-child(2) { opacity: 0; }
+.nav__burger.--open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(8, 16, 11, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: none;
+  flex-direction: column;
+  padding: 100px 24px 32px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+}
+.mobile-drawer.--open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.mobile-drawer__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-drawer__link .arrow {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(200,255,61,.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lime);
+}
+.mobile-drawer__cta {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  /* General typography scaled down */
+  body { font-size: 14px; }
+
+  .container { padding: 0 18px; }
+
+  /* Nav becomes compact */
+  .nav {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    transform: none;
+    width: auto;
+    padding: 8px 8px 8px 16px;
+    border-radius: 60px;
+  }
+  .nav__logo { font-size: 18px; margin-right: 0; }
+  .nav__logo .ball { width: 18px; height: 18px; }
+  .nav__links { display: none; }
+  .nav__burger { display: flex; }
+  .nav > .btn3d { display: none; }
+
+  .mobile-drawer { display: flex; }
+
+  /* Hero */
+  .hero {
+    padding: 90px 0 40px;
+    min-height: auto;
+  }
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .hero__title {
+    font-size: 64px;
+    margin: 12px 0;
+  }
+  .hero__sub {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .hero__cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .hero__cta .btn3d {
+    width: 100%;
+    justify-content: center;
+    padding: 18px 24px;
+    font-size: 14px;
+  }
+  .hero__stats {
+    gap: 14px;
+    margin-top: 28px;
+    padding-top: 20px;
+    flex-wrap: wrap;
+  }
+  .hero__stats > div { flex: 1 1 calc(50% - 7px); }
+  .stat__num { font-size: 34px; }
+  .stat__num .small { font-size: 18px; }
+  .stat__lbl { font-size: 10px; }
+
+  /* Hero court visual - smaller and centered */
+  .hero__visual {
+    height: 360px;
+    transform: scale(.78);
+    transform-origin: center;
+    margin: -40px 0;
+  }
+  .court3d__floor { width: 380px; height: 230px; margin-left: -190px; margin-top: -115px; }
+  .court3d__tag { padding: 8px 10px; font-size: 10px; }
+  .court3d__tag .label { font-size: 9px; }
+  .court3d__tag .value { font-size: 14px !important; }
+
+  /* Sections */
+  .section { padding: 60px 0; }
+  .section__head {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+    align-items: start;
+  }
+  .section__title { font-size: 44px; }
+
+  /* Ticker */
+  .ticker { padding: 16px 0; }
+  .ticker__track { font-size: 22px; gap: 30px; }
+  .ticker__track .star { margin: 0 30px; }
+
+  /* Courts */
+  .courts__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .courtcard { padding: 16px 14px; border-radius: 16px; }
+  .courtcard__num { font-size: 44px; }
+  .courtcard__num .small { font-size: 20px; }
+  .courtcard__type { font-size: 9px; margin: 4px 0 10px; }
+  .courtcard__viz { height: 44px; margin-top: 8px; }
+  .courtcard__status { font-size: 11px; padding-top: 10px; margin-top: 10px; }
+
+  /* Booking - mobile optimized */
+  .booking__panel {
+    padding: 22px 16px;
+    border-radius: 22px;
+  }
+  .booking__panel::before { height: 2px; }
+  .booking__steplbl { font-size: 10px; margin-bottom: 18px; }
+
+  .dategrid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .datebtn {
+    padding: 10px 4px;
+    border-radius: 10px;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+  .datebtn .day { font-size: 9px; letter-spacing: .08em; }
+  .datebtn .num { font-size: 20px; margin-top: 2px; }
+
+  .slotgrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .slot {
+    padding: 11px 6px;
+    font-size: 17px;
+    border-radius: 10px;
+  }
+  .slot .price { font-size: 9px; }
+  .slot.--peak::after { font-size: 7px; padding: 1px 4px; top: -4px; right: -4px; }
+
+  .courtchooser {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .courtopt { padding: 14px; border-radius: 12px; }
+  .courtopt__name { font-size: 18px; }
+  .courtopt__type { font-size: 9px; }
+  .courtopt__feat .f { font-size: 9px; padding: 2px 7px; }
+
+  .summary {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    margin-top: 20px;
+  }
+  .summary > div:nth-child(2) {
+    align-items: stretch !important;
+    gap: 16px;
+  }
+  .summary__total { font-size: 42px; }
+  .summary__total .cur { font-size: 18px; }
+  .summary .btn3d { width: 100%; justify-content: center; }
+
+  /* Pricing */
+  .pricing__grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .plan {
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+  .plan__name { font-size: 26px; }
+  .plan__price { font-size: 56px; margin-top: 16px; }
+  .plan__price .cur { font-size: 22px; vertical-align: 14px; }
+  .plan__feat { gap: 10px; margin: 20px 0 22px; }
+  .plan__feat li { font-size: 13px; }
+
+  /* Amenities */
+  .amenities__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .amen { padding: 18px 14px; border-radius: 16px; }
+  .amen__icon { width: 40px; height: 40px; font-size: 18px; margin-bottom: 12px; border-radius: 10px; }
+  .amen__name { font-size: 17px; }
+  .amen__desc { font-size: 12px; }
+
+  /* Social / testimonials - swipeable */
+  .social__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    grid-auto-columns: 88%;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -18px;
+    padding: 0 18px 8px;
+    scrollbar-width: none;
+  }
+  .social__grid::-webkit-scrollbar { display: none; }
+  .testi {
+    padding: 22px;
+    scroll-snap-align: start;
+  }
+  .testi__quote { font-size: 15px; }
+
+  /* Location */
+  .location__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .map { min-height: 280px; border-radius: 22px; }
+  .info__card { padding: 18px; border-radius: 14px; }
+  .info__lbl { font-size: 10px; margin-bottom: 6px; }
+  .info__val { font-size: 16px; }
+
+  /* WhatsApp FAB */
+  .wafab {
+    bottom: 16px; right: 16px;
+    gap: 10px;
+  }
+  .wafab__bubble {
+    display: none; /* Hide bubble on mobile - cleaner */
+  }
+  .wafab__btn {
+    width: 58px; height: 58px;
+  }
+  .wafab__btn svg { width: 28px; height: 28px; }
+
+  /* Footer */
+  .footer { padding: 50px 0 28px; }
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 36px;
+  }
+  .footer__brand { font-size: 42px; }
+  .footer__big { font-size: 80px; margin: 30px 0 0; }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 11px;
+  }
+  .fab3d { width: 46px; height: 46px; }
+
+  /* Bigger touch targets */
+  .btn3d.--sm { padding: 14px 18px; font-size: 13px; }
+
+  /* Disable some hovers on touch */
+  .courtcard:hover, .amen:hover, .plan:hover { transform: none; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .hero__title { font-size: 54px; }
+  .section__title { font-size: 36px; }
+  .courts__grid { grid-template-columns: 1fr; }
+  .amenities__grid { grid-template-columns: 1fr; }
+  .slotgrid { grid-template-columns: repeat(2, 1fr); }
+  .stat__num { font-size: 28px; }
+}
+
+/* Touch device tweaks - kill hover transforms */
+@media (hover: none) {
+  .btn3d:hover { transform: translateY(0); box-shadow: 0 6px 0 var(--b-shadow), 0 12px 28px rgba(0,0,0,.4); }
+  .btn3d.--sm:hover { box-shadow: 0 4px 0 var(--b-shadow), 0 8px 16px rgba(0,0,0,.35); }
+  .datebtn:hover, .slot:hover, .courtopt:hover, .courtcard:hover { transform: none; }
+}
